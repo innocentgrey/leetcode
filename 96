@@ -1,0 +1,27 @@
+/*
+public class Solution {
+    public int numTrees(int n) {
+        int totalnum = 0;
+        if(n == 1) return 1;
+        if(n == 0) return 1;
+        for(int i = 1; i <= n; i++) {
+            totalnum += numTrees(i - 1) * numTrees(n - i);
+        }
+        return totalnum;
+    }
+}*/   //this solution will make too many recursions, costing too much time
+
+public class Solution {
+    public int numTrees(int n) {
+        int[] numTreeArray = new int[n + 1];
+        int totalnum = 0;
+        numTreeArray[0] = numTreeArray[1] = 1;
+        for(int i = 2; i <= n; i++) {
+            numTreeArray[i] = 0;
+            for(int j = 1; j<= i; j++) {
+                numTreeArray[i] += numTreeArray[j - 1] * numTreeArray[i - j];
+            }
+        }
+        return numTreeArray[n];
+    }
+}//my accepted solution, beats 4.24% of java submission:use an array to record numTrees(1..n)
